@@ -1,0 +1,21 @@
+{% extends 'studyplanner/base.html'%}
+
+{% block body%}
+{% if all_albums %}
+<ul>
+    {% for album in all_albums%}
+        <li><a href='/studyplanner/{{album.id}}/'>{{album.id}} : {{album.album_title}}</a><br><br>
+        <a href="/studyplanner/album/{{album.id}}/update/ "><button> Click Here to Update the details</button></a><br>
+        <a href="/studyplanner/album/{{album.id}}/delete/"><button> Click Here to Delete </button></a>
+        </li>
+    {% endfor %}
+    
+
+ {% else %}
+    <h3>You dont have any albums</h3>
+{% endif %}
+
+</ul>
+<a href="/studyplanner/album/add/"><button>Click Here to Add Album </button></a>
+
+{%endblock%}

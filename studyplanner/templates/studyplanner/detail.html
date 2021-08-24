@@ -1,0 +1,45 @@
+<!--Loads the path to your static files-->
+{%extends 'studyplanner/base.html' %}
+
+{% load static %}
+{% block body%}
+<div id="body">
+
+
+<img src="{{album.album_logo.url}}"><br><br>
+<h1>{{album.album_title}}</h1><br><br>
+<h1>{{album.genre}}</h1><br><br>
+
+<h3>{{album.artist}}</h3><br><br>
+
+
+<ul>
+    {% for x in album.song_set.all%}
+    <li>{{x.song_title}} -  {{x.file_type}}</li><br><br>
+    {%endfor%}
+
+</ul><br>
+<h3> Select Your Favourite Songs from this List</h3>
+
+{% if error_message%}
+    <p><strong>{{error_message}}</strong></p>
+{%endif%}
+
+<form action="/studyplanner/{{album.id}}/favourite/" method="POST">
+    {% csrf_token %}
+    {% for song in album.song_set.all%}
+    <input type="radio" name="song" value="{{song.id}}" id="song{{forloop.counter}}" /> 
+    <label for="song{{forloop.counter}}">
+        {{song.song_title}} 
+    {% if song.is_favourite%}
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Five-pointed_star.svg/1200px-Five-pointed_star.svg.png">
+    {%endif%}
+    </label>
+
+    <br>
+    {%endfor%}
+    <br>
+    <input type="submit" value="Favourite">
+</form>
+</div>
+{%endblock%}
