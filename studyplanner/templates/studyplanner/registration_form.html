@@ -1,0 +1,17 @@
+{% extends 'studyplanner/base.html' %}
+{% block body%}
+<div class="container-fluid">
+    <p> Hii this is a form to Register new user </p><br><br>
+    <form action="" method="POST">
+    {% csrf_token %} 
+        {% for field in form%}
+            <span class="text-danger small">{{field.errors}}</span>
+            <br>
+            <label class="">{{field.label_tag}}</label><br><br>
+            <div>{{field}}</div>
+
+        {% endfor%}
+        <input type="Submit" value="Submit" >
+    </form>
+</div>
+{% endblock%}

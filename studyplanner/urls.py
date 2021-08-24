@@ -28,5 +28,7 @@ urlpatterns=[
     #/studyplanner/album/album_id/delete/
     url(r'album/(?P<pk>[0-9]+)/delete/$', views.AlbumDelete.as_view(), name='album-delete'),
 
+    url(r'^register/$', views.UserFormView.as_view(), name='register'),
+
 
 ]
